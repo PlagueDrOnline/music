@@ -1,0 +1,814 @@
+/**
+ * CuredHosting theme styles.
+ *
+ * Design tokens (colors, type, spacing) live in theme.json. This file holds
+ * the component styling that blocks alone can't express: plan cards, the
+ * comparison table, the FAQ accordion, the promo band, both forms, focus
+ * states, and reduced-motion handling.
+ *
+ * Everything is namespaced with the `ch-` prefix so it cannot collide with
+ * core block classes or a future child theme.
+ */
+
+/* ==========================================================================
+   0. Base & tokens
+   ========================================================================== */
+
+:root {
+	--ch-pine: #164733;
+	--ch-pine-deep: #0c2e21;
+	--ch-cream: #f7f3e9;
+	--ch-paper: #ffffff;
+	--ch-sage: #e7ece3;
+	--ch-ink: #1c2a22;
+	--ch-ink-soft: #46564c;
+	--ch-gold: #c9a24b;
+	--ch-gold-deep: #7a5a1e;
+	--ch-line: #d5dccf;
+	--ch-error: #8f2b2b;
+	--ch-error-bg: #f9ecec;
+	--ch-success: #1f5b3c;
+	--ch-success-bg: #eef4ef;
+
+	--ch-radius: 14px;
+	--ch-focus: 3px;
+}
+
+/* Generous, calm text rendering. */
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
+}
+
+/* ==========================================================================
+   1. Focus states (WCAG 2.2 — visible, high contrast, keyboard first)
+   ========================================================================== */
+
+/* Visible focus for keyboard users; :focus-visible keeps mouse clicks clean. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+.wp-block-button__link:focus-visible,
+.wp-block-navigation-item:focus-visible {
+	outline: var(--ch-focus) solid var(--ch-gold-deep);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* On dark bands, switch the outline to gold so it stays visible. */
+.ch-section-dark a:focus-visible,
+.ch-section-dark button:focus-visible,
+.ch-section-dark .wp-block-button__link:focus-visible,
+.ch-site-footer a:focus-visible,
+.ch-site-footer button:focus-visible {
+	outline-color: var(--ch-gold);
+}
+
+/* Skip link: hidden until focused, then unmissable. */
+.ch-skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 100000;
+	padding: 0.85rem 1.4rem;
+	background: var(--ch-pine-deep);
+	color: var(--ch-cream);
+	text-decoration: none;
+	font-weight: 600;
+	border-radius: 0 0 10px 0;
+}
+
+.ch-skip-link:focus {
+	left: 0;
+	outline: var(--ch-focus) solid var(--ch-gold);
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   2. Brand / header
+   ========================================================================== */
+
+.ch-brand {
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.ch-brand img,
+.ch-brand__logo img {
+	display: block;
+	height: auto;
+}
+
+/* ==========================================================================
+   3. Kicker (small eyebrow labels)
+   ========================================================================== */
+
+.ch-kicker {
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* ==========================================================================
+   4. Buttons (theme-level, used by plan cards & forms)
+   ========================================================================== */
+
+.ch-btn {
+	display: inline-block;
+	padding: 0.8rem 1.4rem;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+	line-height: 1.2;
+	text-decoration: none;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.ch-btn--primary {
+	background: var(--ch-pine);
+	color: var(--ch-cream);
+	border-color: var(--ch-pine);
+}
+
+.ch-btn--primary:hover {
+	background: var(--ch-pine-deep);
+	border-color: var(--ch-pine-deep);
+	color: var(--ch-cream);
+}
+
+.ch-btn--outline {
+	background: transparent;
+	color: var(--ch-pine);
+	border-color: var(--ch-pine);
+}
+
+.ch-btn--outline:hover {
+	background: var(--ch-pine);
+	color: var(--ch-cream);
+}
+
+/* ==========================================================================
+   5. Plan cards
+   ========================================================================== */
+
+.ch-plans {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Business plans + linux: two-up feels roomier than four narrow cards. */
+.ch-plans--wordpress,
+.ch-plans--linux {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	max-width: 62rem;
+}
+
+@media (max-width: 1080px) {
+	.ch-plans {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	.ch-plans,
+	.ch-plans--wordpress,
+	.ch-plans--linux {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.ch-plan-card {
+	display: flex;
+	flex-direction: column;
+	background: var(--ch-paper);
+	border: 1px solid var(--ch-line);
+	border-radius: var(--ch-radius);
+	padding: 1.75rem;
+	box-shadow: 0 1px 2px rgba(28, 42, 34, 0.04);
+}
+
+.ch-plan-card__name {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--large, 1.5rem);
+}
+
+.ch-plan-card__tagline {
+	margin: 0.5rem 0 0;
+	color: var(--ch-ink-soft);
+}
+
+.ch-plan-card__limits {
+	margin: 1.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ch-plan-card__limits li {
+	position: relative;
+	padding: 0.3rem 0 0.3rem 1.6rem;
+	border-bottom: 1px solid var(--ch-line);
+}
+
+.ch-plan-card__limits li:last-child {
+	border-bottom: 0;
+}
+
+.ch-plan-card__limits li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	top: 0.3rem;
+	color: var(--ch-success);
+	font-weight: 700;
+}
+
+.ch-plan-card__bestfor {
+	margin: 1rem 0 0;
+	color: var(--ch-ink);
+}
+
+.ch-plan-card__price {
+	margin: 0.75rem 0 0;
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+}
+
+.ch-plan-card__cta {
+	margin-top: auto;
+	padding-top: 1.25rem;
+	text-align: center;
+}
+
+.ch-plan-card .ch-btn {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.ch-plan-card__fairuse {
+	margin: 1rem 0 0;
+	padding-top: 1rem;
+	border-top: 1px solid var(--ch-line);
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.9rem);
+}
+
+/* ==========================================================================
+   6. Comparison table
+   ========================================================================== */
+
+.ch-table-wrap {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border: 1px solid var(--ch-line);
+	border-radius: var(--ch-radius);
+	background: var(--ch-paper);
+}
+
+.ch-table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 40rem;
+}
+
+.ch-table th,
+.ch-table td {
+	padding: 0.85rem 1rem;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: 1px solid var(--ch-line);
+}
+
+.ch-table thead th {
+	background: var(--ch-sage);
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+	white-space: nowrap;
+}
+
+.ch-table tbody th[scope="row"] {
+	font-weight: 600;
+	color: var(--ch-ink);
+	white-space: nowrap;
+}
+
+.ch-table tbody tr:last-child th,
+.ch-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+.ch-table tfoot th,
+.ch-table tfoot td {
+	background: var(--ch-cream);
+	border-bottom: 0;
+}
+
+.ch-table-note {
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+}
+
+/* ==========================================================================
+   7. Checklists & scope lists (migration, promo landing)
+   ========================================================================== */
+
+.ch-checklist,
+.ch-scope-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ch-checklist li,
+.ch-scope-list li {
+	position: relative;
+	padding: 0.4rem 0 0.4rem 1.8rem;
+}
+
+.ch-checklist li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	top: 0.4rem;
+	color: var(--ch-success);
+	font-weight: 700;
+}
+
+.ch-scope-list li::before {
+	content: "–";
+	position: absolute;
+	left: 0;
+	top: 0.4rem;
+	color: var(--ch-gold-deep);
+	font-weight: 700;
+}
+
+/* ==========================================================================
+   8. Onboarding steps (numbered, generous)
+   ========================================================================== */
+
+.ch-steps {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: ch-step;
+}
+
+.ch-steps > li {
+	position: relative;
+	counter-increment: ch-step;
+	padding: 0.85rem 0 0.85rem 3.2rem;
+	border-bottom: 1px solid var(--ch-line);
+}
+
+.ch-steps > li:last-child {
+	border-bottom: 0;
+}
+
+.ch-steps > li::before {
+	content: counter(ch-step);
+	position: absolute;
+	left: 0;
+	top: 0.8rem;
+	width: 2.1rem;
+	height: 2.1rem;
+	display: grid;
+	place-items: center;
+	background: var(--ch-pine);
+	color: var(--ch-cream);
+	border-radius: 50%;
+	font-weight: 700;
+	font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   9. Promo band (grand opening)
+   ========================================================================== */
+
+.ch-promo {
+	max-width: 62rem;
+}
+
+.ch-promo__inner {
+	background: var(--ch-paper);
+	border: 1px solid var(--ch-line);
+	border-left: 5px solid var(--ch-gold);
+	border-radius: var(--ch-radius);
+	padding: 2.25rem;
+}
+
+.ch-promo__heading {
+	margin-top: 0.25rem;
+}
+
+.ch-promo__points {
+	margin: 1.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ch-promo__points li {
+	position: relative;
+	padding: 0.55rem 0 0.55rem 1.9rem;
+	border-bottom: 1px solid var(--ch-line);
+}
+
+.ch-promo__points li:last-child {
+	border-bottom: 0;
+}
+
+.ch-promo__points li::before {
+	content: "◆";
+	position: absolute;
+	left: 0;
+	top: 0.6rem;
+	color: var(--ch-gold);
+	font-size: 0.85rem;
+}
+
+.ch-promo__terms {
+	margin-top: 1.5rem;
+	padding: 1rem 1.25rem;
+	background: var(--ch-cream);
+	border-radius: 10px;
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.9rem);
+}
+
+.ch-promo__link {
+	margin-top: 1.25rem;
+}
+
+/* ==========================================================================
+   10. Support summary
+   ========================================================================== */
+
+.ch-support-summary {
+	margin: 0;
+	display: grid;
+	gap: 0.65rem;
+}
+
+.ch-support-summary__row {
+	display: grid;
+	grid-template-columns: 6.5rem 1fr;
+	gap: 0.75rem;
+	align-items: baseline;
+}
+
+.ch-support-summary dt {
+	color: var(--ch-gold-deep);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-size: 0.8rem;
+}
+
+.ch-support-summary dd {
+	margin: 0;
+}
+
+.ch-support-summary__note {
+	margin: 1rem 0 0;
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.95rem);
+}
+
+/* Dark band variant (personal support section). */
+.ch-section-dark .ch-support-summary dt {
+	color: var(--ch-gold);
+}
+
+.ch-section-dark .ch-support-summary a,
+.ch-section-dark a {
+	color: var(--ch-cream);
+}
+
+.ch-section-dark .ch-support-summary__note {
+	color: rgba(247, 243, 233, 0.8);
+}
+
+/* Footer variant: stack tight, inherit cream text. */
+.ch-support-summary--footer .ch-support-summary__row {
+	grid-template-columns: auto;
+	gap: 0.1rem;
+}
+
+.ch-support-summary--footer dt {
+	color: var(--ch-gold);
+}
+
+/* ==========================================================================
+   11. FAQ accordion (native <details>, JS optional)
+   ========================================================================== */
+
+.ch-faq {
+	display: grid;
+	gap: 0.75rem;
+	max-width: 46rem;
+}
+
+.ch-faq__item {
+	background: var(--ch-paper);
+	border: 1px solid var(--ch-line);
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.ch-faq__item summary {
+	cursor: pointer;
+	padding: 1rem 2.6rem 1rem 1.25rem;
+	font-weight: 600;
+	list-style: none; /* hide default marker */
+	position: relative;
+}
+
+.ch-faq__item summary::-webkit-details-marker {
+	display: none;
+}
+
+.ch-faq__item summary::after {
+	content: "+";
+	position: absolute;
+	right: 1.1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--ch-pine);
+	font-weight: 700;
+	font-size: 1.2rem;
+}
+
+.ch-faq__item[open] summary::after {
+	content: "–";
+}
+
+.ch-faq__answer {
+	padding: 0 1.25rem 1.1rem;
+	color: var(--ch-ink-soft);
+}
+
+.ch-faq__answer p {
+	margin: 0;
+}
+
+/* ==========================================================================
+   12. Forms
+   ========================================================================== */
+
+.ch-form {
+	max-width: 34rem;
+}
+
+.ch-form--wide {
+	max-width: 46rem;
+}
+
+.ch-fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0 0 1.5rem;
+}
+
+.ch-fieldset legend {
+	padding: 0;
+	margin-bottom: 0.85rem;
+	font-weight: 700;
+	font-size: var(--wp--preset--font-size--large, 1.3rem);
+	color: var(--ch-pine);
+	font-family: var(--wp--preset--font-family--display, Georgia, serif);
+}
+
+.ch-field {
+	margin-bottom: 1.1rem;
+}
+
+.ch-field-row {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+@media (max-width: 640px) {
+	.ch-field-row {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.ch-field label,
+.ch-field-label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 0.35rem;
+	color: var(--ch-ink);
+}
+
+.ch-field input[type="text"],
+.ch-field input[type="email"],
+.ch-field input[type="number"],
+.ch-field select,
+.ch-field textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.65rem 0.8rem;
+	border: 1px solid var(--ch-line);
+	border-radius: 8px;
+	background: var(--ch-paper);
+	color: var(--ch-ink);
+	font: inherit;
+}
+
+.ch-field textarea {
+	resize: vertical;
+	min-height: 5rem;
+}
+
+.ch-field input:focus,
+.ch-field select:focus,
+.ch-field textarea:focus {
+	border-color: var(--ch-pine);
+}
+
+.ch-field-hint {
+	margin: 0.3rem 0 0;
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.85rem);
+}
+
+.ch-req {
+	color: var(--ch-error);
+	font-weight: 700;
+}
+
+/* Radio / checkbox rows. */
+.ch-choice {
+	display: flex;
+	gap: 0.6rem;
+	align-items: flex-start;
+	font-weight: 400;
+	margin-bottom: 0.45rem;
+}
+
+.ch-choice input {
+	margin-top: 0.25rem;
+	width: 1.05rem;
+	height: 1.05rem;
+	flex-shrink: 0;
+}
+
+.ch-consent {
+	display: flex;
+	gap: 0.6rem;
+	align-items: flex-start;
+	font-weight: 400;
+}
+
+.ch-consent input {
+	margin-top: 0.3rem;
+	width: 1.1rem;
+	height: 1.1rem;
+	flex-shrink: 0;
+}
+
+/* Field error message. */
+.ch-field-error {
+	margin: 0.35rem 0 0;
+	color: var(--ch-error);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--small, 0.9rem);
+}
+
+.ch-field input[aria-invalid="true"],
+.ch-field textarea[aria-invalid="true"],
+.ch-field select[aria-invalid="true"] {
+	border-color: var(--ch-error);
+}
+
+/* Form-level notices. */
+.ch-form-notice {
+	padding: 1rem 1.25rem;
+	background: var(--ch-cream);
+	border-radius: 10px;
+	color: var(--ch-ink-soft);
+	font-size: var(--wp--preset--font-size--small, 0.9rem);
+}
+
+/* Success banner. */
+.ch-form-success {
+	padding: 1.1rem 1.4rem;
+	background: var(--ch-success-bg);
+	border: 1px solid var(--ch-success);
+	border-radius: 10px;
+	margin-bottom: 1.5rem;
+}
+
+/* Error summary. */
+.ch-form-errors {
+	padding: 1.1rem 1.4rem;
+	background: var(--ch-error-bg);
+	border: 1px solid var(--ch-error);
+	border-radius: 10px;
+	margin-bottom: 1.5rem;
+}
+
+.ch-form-errors__title {
+	margin: 0 0 0.5rem;
+	font-weight: 700;
+	color: var(--ch-error);
+}
+
+.ch-form-errors ul {
+	margin: 0;
+	padding-left: 1.2rem;
+}
+
+.ch-form-errors a {
+	color: var(--ch-error);
+	font-weight: 600;
+}
+
+/* Honeypot: visually removed, still in the DOM for bots. */
+.ch-hp {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* ==========================================================================
+   13. Footer
+   ========================================================================== */
+
+.ch-site-footer a {
+	color: var(--ch-cream);
+}
+
+.ch-site-footer a:hover {
+	color: var(--ch-gold);
+}
+
+.ch-footer__links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ch-footer__links li {
+	margin-bottom: 0.45rem;
+}
+
+.ch-footer__tagline {
+	font-weight: 600;
+}
+
+.ch-footer__infra,
+.ch-footer__legal-line {
+	font-size: var(--wp--preset--font-size--small, 0.9rem);
+	opacity: 0.85;
+	margin-bottom: 0.5rem;
+}
+
+.ch-footer__rule {
+	margin-top: 2.5rem;
+	margin-bottom: 1.5rem;
+	opacity: 0.4;
+}
+
+/* ==========================================================================
+   14. Motion preferences (WCAG 2.2)
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* ==========================================================================
+   15. Print
+   ========================================================================== */
+
+@media print {
+	.ch-site-header,
+	.ch-site-footer,
+	.ch-skip-link,
+	.ch-form,
+	.ch-btn {
+		display: none !important;
+	}
+
+	body {
+		background: #fff;
+		color: #000;
+	}
+}

@@ -1,0 +1,26 @@
+/*
+Theme Name: CuredHosting
+Theme URI: https://curedhosting.com
+Author: CuredHosting
+Author URI: https://curedhosting.com
+Description: A calm, warm, trust-first block theme for CuredHosting — "the cure for the common hosting headache." Built around honest plan limits, a grand-opening offer written in plain language, personal-tech support messaging, accessible forms, and zero third-party dependencies.
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 7.4
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: curedhosting
+Tags: block-theme, block-patterns, full-site-editing, custom-logo, custom-menu, one-column, translation-ready, accessibility-ready
+
+CuredHosting palette:
+  deep pine green  #164733 (primary)
+  pine deep        #0C2E21 (hover / footer)
+  warm cream       #F7F3E9 (background)
+  paper            #FFFFFF (cards)
+  restrained gold  #C9A24B (accent) / #7A5A1E (small gold text)
+
+This stylesheet intentionally contains only the theme header.
+Visual styling lives in theme.json (design tokens) and
+assets/css/theme.css (forms, plan cards, FAQ, focus states).
+*/

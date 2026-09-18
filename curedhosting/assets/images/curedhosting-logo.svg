@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 312" width="256" height="312" role="img" aria-labelledby="ch-logo-title">
+  <title id="ch-logo-title">CuredHosting — curedhosting.com</title>
+  <desc>Vector stand-in for the supplied CuredHosting mark: gold split ring around an interlocked red C and blue H, with the CURED HOSTING wordmark. Replace by dropping perfectlogo-256.png into assets/images/.</desc>
+  <defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6dd9a"/>
+      <stop offset="0.5" stop-color="#d4a437"/>
+      <stop offset="1" stop-color="#8a5a12"/>
+    </linearGradient>
+    <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e06070"/>
+      <stop offset="0.55" stop-color="#a11226"/>
+      <stop offset="1" stop-color="#6b0813"/>
+    </linearGradient>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fb2ef"/>
+      <stop offset="0.55" stop-color="#2456b0"/>
+      <stop offset="1" stop-color="#123a86"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="256" height="312" fill="#ffffff"/>
+
+  <!-- Split gold ring (gaps at top-right and bottom-left, as in the mark) -->
+  <g fill="none" stroke="url(#gGold)" stroke-width="12" stroke-linecap="round">
+    <path d="M 174 38.3 A 92 92 0 1 0 82 197.7"/>
+    <path d="M 57.5 177.2 A 92 92 0 1 0 144 27.4"/>
+  </g>
+  <g fill="none" stroke="#6b4a10" stroke-width="1.5" opacity="0.55">
+    <path d="M 174 38.3 A 92 92 0 1 0 82 197.7"/>
+    <path d="M 57.5 177.2 A 92 92 0 1 0 144 27.4"/>
+    <circle cx="128" cy="118" r="99" opacity="0.35"/>
+  </g>
+
+  <!-- Interlocked C (red) and H (blue) -->
+  <g font-family="Georgia, 'Times New Roman', 'DejaVu Serif', serif" font-weight="bold">
+    <text x="50" y="172" font-size="150" fill="url(#gRed)" stroke="#3a0510" stroke-width="2">C</text>
+    <text x="110" y="172" font-size="150" fill="url(#gBlue)" stroke="#0a1e4a" stroke-width="2">H</text>
+  </g>
+
+  <!-- Soft top highlight -->
+  <ellipse cx="112" cy="66" rx="62" ry="24" fill="#ffffff" opacity="0.16" transform="rotate(-18 112 66)"/>
+
+  <!-- Wordmark -->
+  <text x="128" y="268" text-anchor="middle" font-family="Georgia, 'Times New Roman', 'DejaVu Serif', serif" font-weight="bold" font-size="29" letter-spacing="3" fill="url(#gGold)" stroke="#6b4a10" stroke-width="0.6">CURED HOSTING</text>
+  <text x="128" y="296" text-anchor="middle" font-family="Georgia, 'Times New Roman', 'DejaVu Serif', serif" font-size="15" letter-spacing="1" fill="#3c3c3c">curedhosting.com</text>
+</svg>
