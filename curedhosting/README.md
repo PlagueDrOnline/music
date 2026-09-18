@@ -38,7 +38,7 @@ curedhosting/
 ├── assets/
 │   ├── css/theme.css             Components: cards, table, FAQ, forms, focus
 │   ├── js/theme.js               ~1 KB progressive enhancement only
-│   └── images/                   Logo assets + screenshot
+│   └── images/                   Logo assets (brand raster + fallbacks)
 └── docs/                         Architecture + checklists + testing guides
 ```
 
@@ -65,9 +65,10 @@ Requirements: WordPress **6.4+**, PHP **7.4+**.
 ## 3. Customizer / Site Editor setup
 
 - **Site Identity → logo:** on activation the theme auto-installs the logo
-  from `assets/images/` (prefers `perfectlogo-256.png`). Replace via
-  **Customize → Site Identity** or by dropping the final raster into
-  `assets/images/perfectlogo-256.png` and re-activating.
+  from `assets/images/` (prefers `perfectlogo-256.png`, which now ships
+  with the theme, so fresh installs get the real mark automatically).
+  Replace via **Customize → Site Identity**, or by swapping that file
+  (same name) and re-activating.
 - **Navigation:** header uses a navigation block with relative links to the
   standard slugs. Adjust labels/links in **Appearance → Editor → header**.
 - **Templates & parts:** edit in the Site Editor; the theme ships

@@ -124,15 +124,16 @@ add_action( 'wp_body_open', 'curedhosting_skip_link' );
  * theme activation (only if no custom logo is already set).
  *
  * The canonical logo assets live in assets/images/:
- *   - perfectlogo-256.png  (THE supplied brand raster — preferred)
- *   - curedhosting-logo.svg (faithful vector stand-in, used if the raster
- *     is not present; e.g. before the real asset is dropped in)
+ *   - perfectlogo-256.png  (THE supplied brand raster — preferred; this
+ *     is the real mark from the live site and now ships with the theme)
+ *   - curedhosting-logo.svg (faithful vector stand-in, kept as a
+ *     lightweight fallback)
  *   - curedhosting-logo.png (rasterized stand-in fallback for WP media)
  *
  * The supplied PNG was delivered from
  * https://curedhosting.com/wp-content/themes/cured-hosting/assets/perfectlogo-256.png
- * — drop that exact file into assets/images/ and it takes precedence
- * automatically on the next theme activation (or set it manually under
+ * and is bundled at assets/images/perfectlogo-256.png, so a fresh theme
+ * activation installs it automatically (or set it manually under
  * Appearance → Customize → Site Identity).
  *
  * @return void

@@ -45,10 +45,10 @@ No third-party endpoint is contacted; no secrets are hardcoded.
 - No prices were supplied: cards show a configurable “price confirmed in
   writing” note instead of invented numbers; each plan has an optional
   price field for later.
-- The supplied logo raster could not be fetched from this sandbox (the live
-  host refuses sandbox connections); the theme therefore *prefers*
-  `assets/images/perfectlogo-256.png` whenever present and falls back to a
-  bundled faithful stand-in until it is.
+- The supplied logo raster (`assets/images/perfectlogo-256.png`, the real
+  256×256 transparent mark from the live site) ships with the theme and is
+  auto-installed on activation; the bundled faithful stand-ins remain only
+  as fallbacks.
 - Standard page slugs are those created by the starter-pages tool; the
   header nav links to them with relative URLs.
 

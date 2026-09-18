@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 312" width="256" height="312" role="img" aria-labelledby="ch-logo-title">
   <title id="ch-logo-title">CuredHosting — curedhosting.com</title>
-  <desc>Vector stand-in for the supplied CuredHosting mark: gold split ring around an interlocked red C and blue H, with the CURED HOSTING wordmark. Replace by dropping perfectlogo-256.png into assets/images/.</desc>
+  <desc>Vector stand-in for the supplied CuredHosting mark: gold split ring around an interlocked red C and blue H, with the CURED HOSTING wordmark. The real raster (perfectlogo-256.png) now ships alongside; this SVG remains as a lightweight fallback.</desc>
   <defs>
     <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f6dd9a"/>
